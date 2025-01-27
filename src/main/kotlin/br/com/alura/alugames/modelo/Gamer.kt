@@ -1,5 +1,6 @@
 package br.com.alura.alugames.modelo
 
+import java.util.Scanner
 import kotlin.random.Random
 
 
@@ -13,18 +14,17 @@ data class Gamer(var nome:String,var email:String){
             }
         }
 
+    var idInterno:String? = null
+        private set
+
+    var jogosBuscados:MutableList<Jogo?> = mutableListOf<Jogo?>()
+
     fun criarIdInterno() {
         val numero = Random.nextInt(10000)
         val tag = String.format("%04d", numero)
 
         idInterno = "$usuario#$tag"
     }
-
-
-
-
-    var idInterno:String? = null
-        private set
 
     constructor(nome: String,email: String,dataNascimento:String,usuario:String):this(nome,email){
         this.dataNascimento = dataNascimento
@@ -49,6 +49,29 @@ data class Gamer(var nome:String,var email:String){
             return email
         } else{
             throw IllegalArgumentException("Email inválido")
+        }
+    }
+
+    companion object{
+        fun criarGamer(leitura:Scanner) : Gamer{
+            println("Boas vindas ao AluGames! Vamos fazer seu cadastro. Digite seu nome:")
+            val nome = leitura.nextLine()
+            println("Digite seu e-mail:")
+            val email = leitura.nextLine()
+            println("Deseja completar seu cadastro com usuário e data de nascimento? (S/N)")
+            val opcao = leitura.nextLine()
+
+            if (opcao.equals("s", true)) {
+                println("Digite sua data de nascimento(DD/MM/AAAA):")
+                val nascimento = leitura.nextLine()
+                println("Digite seu nome de usuário:")
+                val usuario = leitura.nextLine()
+
+                return Gamer(nome,email,nascimento, usuario)
+            }else{
+                return Gamer(nome,email)
+            }
+
         }
     }
 
