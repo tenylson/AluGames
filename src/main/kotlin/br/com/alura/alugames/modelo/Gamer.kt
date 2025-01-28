@@ -26,6 +26,10 @@ data class Gamer(var nome:String,var email:String){
         idInterno = "$usuario#$tag"
     }
 
+    fun alogaJogo(jogo: Jogo):Aluguel{
+        return Aluguel(this,jogo)
+    }
+
     constructor(nome: String,email: String,dataNascimento:String,usuario:String):this(nome,email){
         this.dataNascimento = dataNascimento
         this.usuario = usuario
