@@ -1,10 +1,8 @@
 package br.com.alura.alugames.servicos
 
-import br.com.alura.alugames.modelo.Gamer
-import br.com.alura.alugames.modelo.InfoJogo
-import br.com.alura.alugames.modelo.InfoGamesJson
-import br.com.alura.alugames.modelo.Jogo
+import br.com.alura.alugames.modelo.*
 import br.com.alura.alugames.utilitario.criaGamer
+import br.com.alura.alugames.utilitario.criaJogo
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.net.URI
@@ -63,7 +61,7 @@ class ConsumoApi {
         val json = consomeDados(endereco)
 
         val gson = Gson()
-        val meuJogoTipo = object : TypeToken<List<InfoGamesJson>>() {}.type
+        val meuJogoTipo = object : TypeToken<List<InfoJogoJson>>() {}.type
         val listaJogo: List<InfoJogoJson> = gson.fromJson(json, meuJogoTipo)
 
         val listaJogoConvertida = listaJogo.map { infoJogoJson -> infoJogoJson.criaJogo() }
