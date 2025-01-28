@@ -1,5 +1,6 @@
 package br.com.alura.alugames.modelo
 
+import java.time.LocalDate
 import java.util.Scanner
 import kotlin.random.Random
 
@@ -19,6 +20,8 @@ data class Gamer(var nome:String,var email:String){
 
     var jogosBuscados:MutableList<Jogo?> = mutableListOf<Jogo?>()
 
+    var jogosAlugados:MutableList<Aluguel?> = mutableListOf<Aluguel?>()
+
     fun criarIdInterno() {
         val numero = Random.nextInt(10000)
         val tag = String.format("%04d", numero)
@@ -26,8 +29,10 @@ data class Gamer(var nome:String,var email:String){
         idInterno = "$usuario#$tag"
     }
 
-    fun alogaJogo(jogo: Jogo):Aluguel{
-        return Aluguel(this,jogo)
+    fun alugaJogo(jogo: Jogo, periodo: Periodo ):Aluguel{
+        var alugel = Aluguel(this,jogo, periodo)
+        jogosAlugados.add(alugel)
+        return alugel
     }
 
     constructor(nome: String,email: String,dataNascimento:String,usuario:String):this(nome,email){
