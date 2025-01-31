@@ -5,12 +5,11 @@ import java.time.Period
 
 data class Aluguel(
     val gamer: Gamer,
-    val jogo : Jogo,
-    val periodo: Periodo
-){
-    val valorDoAlugel:Double = jogo.preco * periodo.emDias
+    val jogo: Jogo,
+    val periodo: Periodo) {
+    val valorDoAluguel = gamer.plano.obterValor(this)
 
     override fun toString(): String {
-        return "Aluguel do jogo ${jogo.titulo} por ${gamer.nome} pelo valor R$ $valorDoAlugel"
+        return "Aluguel do jogo ${jogo.titulo} por ${gamer.nome} pelo valor R$$valorDoAluguel"
     }
 }
